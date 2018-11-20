@@ -51,7 +51,7 @@ public class SendTemplateMessageController {
 			System.out.println(templateVO);
 			return R.ok().put("data", templateVO);
 		}else {
-			throw new RRException("网络请求异常");
+			throw new RRException("网络请求异常！");
 		}
 	}
 	

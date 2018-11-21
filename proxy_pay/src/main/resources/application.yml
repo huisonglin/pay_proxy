@@ -1,0 +1,15 @@
+#web server
+server:
+  port: 8087
+  servlet:
+    context-path: /
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  activemq:
+    broker-url: tcp://139.219.5.19:61616
+    user: admin
+    password: admin
+    in-memory: true
+    pool:
+      enabled: false

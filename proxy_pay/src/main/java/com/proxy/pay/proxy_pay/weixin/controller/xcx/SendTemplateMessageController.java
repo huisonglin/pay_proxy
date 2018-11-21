@@ -1,6 +1,7 @@
 package com.proxy.pay.proxy_pay.weixin.controller.xcx;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.fastjson.JSON;
@@ -9,6 +10,7 @@ import com.proxy.pay.proxy_pay.utils.JSONUtil;
 import com.proxy.pay.proxy_pay.utils.R;
 import com.proxy.pay.proxy_pay.validator.Assert;
 import com.proxy.pay.proxy_pay.weixin.dto.TemplateDTO;
+import com.proxy.pay.proxy_pay.weixin.service.xcx.SendTemplateMessageService;
 import com.proxy.pay.proxy_pay.weixin.utils.HttpClientResult;
 import com.proxy.pay.proxy_pay.weixin.utils.HttpClientUtils;
 import com.proxy.pay.proxy_pay.weixin.vo.TemplateVO;
@@ -17,6 +19,8 @@ import com.proxy.pay.proxy_pay.weixin.vo.TemplateVO;
 @RequestMapping("/weixin/xcx")
 public class SendTemplateMessageController {
 
+	@Autowired
+	SendTemplateMessageService sendTemplateMessageService;
 	@RequestMapping("/sendTemplateMessage")
 	public  R sendTemplateMessageController(TemplateDTO templateDTO) throws Exception {
 /*		templateDTO.setAccess_token("15_C6nglM8ZiCTudyAXlnM-zSiprJKP0zEu00bOkFAqD8kTizKLozzLmNXdsIX9aYgUgOYD2GRZe6MRonHkf_ZDjLPUMkt0rA3Fg7qFIrxYwQ4hzSck5Hdkefg6M3de81LgHIeeby-c5dlKT_--YIAdACAGQI");
@@ -44,16 +48,10 @@ public class SendTemplateMessageController {
 		Assert.isBlank(templateDTO.getTemplate_id(), "模板ID不能为空");
 		Assert.isBlank(templateDTO.getTouser(), "发送人不能为空");
 		Assert.isNull(templateDTO.getData(), "data不能为空");
-		String url = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token="+templateDTO.getAccess_token();
-		HttpClientResult result = HttpClientUtils.doJsonPost(url, JSON.parseObject(JSON.toJSONString(templateDTO)));
-		if(result.getCode() == 200) {
-			TemplateVO templateVO = JSONUtil.parse(result.getContent(), TemplateVO.class);
-			System.out.println(templateVO);
-			return R.ok().put("data", templateVO);
-		}else {
-			throw new RRException("网络请求异常！");
-		}
+		return sendTemplateMessageService.sendMessage(templateDTO);
 	}
+
+
 	
 /*	public static void main(String[] args) throws Exception {
 		sendTemplateMessageController(new TemplateDTO());

@@ -3,6 +3,7 @@ package com.proxy.pay.proxy_pay.weixin.utils;
 import java.security.MessageDigest;
 import java.util.Random;
 
+
 public class Sha1Util {
 	public static String CHARTSET = "UTF-8";
 	public static String getNonceStr() {
@@ -40,5 +41,4 @@ public class Sha1Util {
 			return null;
 		}
 	}
-
 }

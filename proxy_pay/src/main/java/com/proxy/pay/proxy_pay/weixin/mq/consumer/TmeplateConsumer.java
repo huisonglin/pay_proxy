@@ -1,4 +1,4 @@
-package com.proxy.pay.proxy_pay.weixin.mq;
+package com.proxy.pay.proxy_pay.weixin.mq.consumer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;

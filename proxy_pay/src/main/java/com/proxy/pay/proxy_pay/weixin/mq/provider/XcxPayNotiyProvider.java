@@ -11,9 +11,9 @@ public class XcxPayNotiyProvider {
 	@Autowired
 	JmsTemplate jmsTemplate;
 	
-	public void XcxPayNotiy(String message) {	
+	public void XcxPayNotiy(String queueName,String message) {	
 		
-		jmsTemplate.convertAndSend(new ActiveMQQueue("xcxPayNotiy"),message);	
+		jmsTemplate.convertAndSend(new ActiveMQQueue(queueName),message);	
 		
 	}
 }

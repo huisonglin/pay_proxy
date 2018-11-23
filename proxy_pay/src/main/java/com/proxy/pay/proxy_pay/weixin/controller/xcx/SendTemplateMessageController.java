@@ -1,19 +1,12 @@
 package com.proxy.pay.proxy_pay.weixin.controller.xcx;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.alibaba.fastjson.JSON;
-import com.proxy.pay.proxy_pay.exception.RRException;
-import com.proxy.pay.proxy_pay.utils.JSONUtil;
 import com.proxy.pay.proxy_pay.utils.R;
 import com.proxy.pay.proxy_pay.validator.Assert;
 import com.proxy.pay.proxy_pay.weixin.dto.TemplateDTO;
 import com.proxy.pay.proxy_pay.weixin.service.xcx.SendTemplateMessageService;
-import com.proxy.pay.proxy_pay.weixin.utils.HttpClientResult;
-import com.proxy.pay.proxy_pay.weixin.utils.HttpClientUtils;
-import com.proxy.pay.proxy_pay.weixin.vo.TemplateVO;
 
 @RestController
 @RequestMapping("/weixin/xcx")

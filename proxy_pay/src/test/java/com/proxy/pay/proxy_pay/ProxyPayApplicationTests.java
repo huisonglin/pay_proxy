@@ -16,7 +16,7 @@ public class ProxyPayApplicationTests {
 	XcxPayNotiyProvider xcxPayNotiyProvider;
 	@Test
 	public void contextLoads() {
-		xcxPayNotiyProvider.XcxPayNotiy("消失吧");
+		xcxPayNotiyProvider.XcxPayNotiy("xcxPayNotiy-dev","消失吧");
 	}
 
 }

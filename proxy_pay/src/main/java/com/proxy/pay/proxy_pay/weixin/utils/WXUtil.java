@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
@@ -212,5 +213,50 @@ public static String getChildrenText(List<?> children) {
 	    return dd;
 	}
 
+	
+	public static String createSign(Map<String, Object> parameters, String key) {
+		StringBuffer sb = new StringBuffer();
+		SortedMap<String,Object> sort=new TreeMap<String,Object>(parameters);
+		Set es = sort.entrySet();// 所有参与传参的参数按照accsii排序（升序）
+		Iterator it = es.iterator();
+		while (it.hasNext()) {
+			Map.Entry entry = (Map.Entry) it.next();
+			String k = (String) entry.getKey();
+			Object v = entry.getValue();
+			if (null != v && !"".equals(v) && !"sign".equals(k) && !"key".equals(k)) {
+				sb.append(k + "=" + v + "&");
+			}
+		}
+		sb.append("key=" + key);
+		String sign = MD5Util.MD5Encode(sb.toString(), "UTF-8").toUpperCase();
+		return sign;
+	}
+	
+	
+	/**
+	 * 自定义函数，在官方文档中没有
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	public static String TranferXmlAddSign(Map<String, Object> parameters,String key) throws UnsupportedEncodingException {
+		String sign = createSign(parameters, key);
+		StringBuffer sb = new StringBuffer();
+		sb.append("<xml>");
+		Set<?> es = parameters.entrySet();
+		Iterator<?> it = es.iterator();
+		while (it.hasNext()) {
+			Map.Entry entry = (Map.Entry) it.next();
+			String k = (String) entry.getKey();
+			String v = (String) entry.getValue();
+			if ("attach".equalsIgnoreCase(k) || "body".equalsIgnoreCase(k) || "sign".equalsIgnoreCase(k)) {
+				sb.append("<" + k + ">" + "<![CDATA[" + v + "]]></" + k + ">");
+			} else {
+				sb.append("<" + k + ">" + v + "</" + k + ">");
+			}
+		}
+		sb.append("<sign>"+sign+"</sign>");
+		sb.append("</xml>");
+		return sb.toString();
+	}
 
 }

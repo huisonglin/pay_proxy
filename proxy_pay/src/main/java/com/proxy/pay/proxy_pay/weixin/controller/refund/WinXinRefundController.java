@@ -1,5 +1,4 @@
 package com.proxy.pay.proxy_pay.weixin.controller.refund;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 import java.util.UUID;
 

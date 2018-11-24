@@ -20,7 +20,26 @@ public class WeiXinRefundVO {
     private String coupon_refund_count;
     private String cash_refund_fee;
     private String return_code;
-    public void setTransaction_id(String transaction_id) {
+    
+    
+
+    private String err_code;
+
+    private String err_code_des;
+    
+    public String getErr_code() {
+		return err_code;
+	}
+	public void setErr_code(String err_code) {
+		this.err_code = err_code;
+	}
+	public String getErr_code_des() {
+		return err_code_des;
+	}
+	public void setErr_code_des(String err_code_des) {
+		this.err_code_des = err_code_des;
+	}
+	public void setTransaction_id(String transaction_id) {
          this.transaction_id = transaction_id;
      }
      public String getTransaction_id() {

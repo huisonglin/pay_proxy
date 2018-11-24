@@ -1,8 +1,13 @@
 package com.proxy.pay.proxy_pay.weixin.controller.refund;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSON;
 import com.proxy.pay.proxy_pay.utils.JSONUtil;
 import com.proxy.pay.proxy_pay.utils.R;
 import com.proxy.pay.proxy_pay.validator.Assert;
@@ -19,16 +24,17 @@ public class WinXinRefundController {
 
 	@RequestMapping("/refund")
 	public R refund(WeiXinRefundDTO weiXinRefundDTO) throws Exception {
-/*		weiXinRefundDTO.setAppid("wxbcac66730a4136dc");
+/*		refundService = new RefundService();
+		weiXinRefundDTO.setAppid("wxbcac66730a4136dc");
 		weiXinRefundDTO.setMch_id("1498445182");
 		weiXinRefundDTO.setCertUrl("D:/workspace-sts-3.9.4.RELEASE/YunJiKu/src/main/resources/apiclient_cert.p12");
 		weiXinRefundDTO.setApiKey("1145B1AFA2994480808B42793E486A81");
 		weiXinRefundDTO.setNonce_str(UUID.randomUUID().toString().replaceAll("-", ""));
-		weiXinRefundDTO.setRefundFee("1");
+		weiXinRefundDTO.setRefundFee("97");
 		weiXinRefundDTO.setTotalFee("100");
 		weiXinRefundDTO.setTransactionId("4200000235201811243988916054");
 		weiXinRefundDTO.setOutTradeNo("8E27E30768AE470CA9AE54670960E5F2");
-		weiXinRefundDTO.setOut_refund_no("5416541615414646");*/
+		weiXinRefundDTO.setOut_refund_no("54165415414646");*/
 		Assert.isBlank(weiXinRefundDTO.getApiKey(), "商户密钥不能为空");
 		Assert.isBlank(weiXinRefundDTO.getAppid(), "appId不能为空");
 		Assert.isBlank(weiXinRefundDTO.getCertUrl(), "证书地址不能为空");
@@ -46,6 +52,7 @@ public class WinXinRefundController {
 	
 /*	public static void main(String[] args) throws Exception {
 		WinXinRefundController w = new WinXinRefundController();
+		w.refund(new WeiXinRefundDTO());
 	//	w.refund();
 	}*/
 }

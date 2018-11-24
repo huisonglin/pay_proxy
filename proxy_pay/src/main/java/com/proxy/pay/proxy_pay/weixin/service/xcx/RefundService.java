@@ -25,7 +25,7 @@ import org.apache.http.util.EntityUtils;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
-import com.proxy.pay.proxy_pay.weixin.dto.RefundParamsVO;
+import com.proxy.pay.proxy_pay.weixin.dto.WeiXinRefundDTO;
 import com.proxy.pay.proxy_pay.weixin.utils.WXUtil;
 
 
@@ -34,7 +34,7 @@ public class RefundService {
 	
 
     @SuppressWarnings("deprecation")
-	public  String refund(RefundParamsVO refundParamsVO) throws Exception {
+	public  String refund(WeiXinRefundDTO refundParamsVO) throws Exception {
 
     	KeyStore keyStore  = KeyStore.getInstance("PKCS12");
     	String mchId = refundParamsVO.getMch_id();
@@ -87,17 +87,10 @@ public class RefundService {
                     	result+=text;
                     }    
                     if(result !=null||!"".equals(result)) {
-                        Map<String, String> resultMap = WXUtil.doXMLParse(result);
-                        System.out.println("退款返回信息:"+JSON.toJSONString(resultMap));
-                        if("SUCCESS".equals(resultMap.get("return_code"))) {
-                        	if("SUCCESS".equals(resultMap.get("result_code"))) {
-                        		
-                        	}
-                        }
-                        return resultMap.get("return_msg");     
+                        Map<String, String> resultInfo = WXUtil.doXMLParse(result);
+                        return JSON.toJSONString(resultInfo);    
                     }   
                 }
-                
                 EntityUtils.consume(entity);
             } finally {
                 response.close();

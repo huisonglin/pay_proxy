@@ -1,6 +1,6 @@
 package com.proxy.pay.proxy_pay.weixin.dto;
 
-public class RefundParamsVO {
+public class WeiXinRefundDTO {
 
 	//微信订单号
 	private String transactionId;

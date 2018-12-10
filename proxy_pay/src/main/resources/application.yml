@@ -7,7 +7,7 @@ server:
     uri-encoding: UTF-8
 spring:
   activemq:
-    broker-url: tcp://139.219.5.19:61616
+    broker-url: tcp://139.219.12.141:61616
     user: admin
     password: admin
     in-memory: true

@@ -1,6 +1,6 @@
 #web server
 server:
-  port: 8088
+  port: 8070
   servlet:
     context-path: /
   tomcat:
